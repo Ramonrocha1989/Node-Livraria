@@ -10,13 +10,14 @@ class AutorController {
     static listarAutorPorId = (req, res) => {
         const id = req.params.id;
 
-        autores.findById(id, (err, autores) => {
-            if (err) {
-                res.status(400).send({ message: `${err.message} - Id do Autor não localizado.` })
-            } else {
-                res.status(200).send(autores);
-            }
-        })
+        autores.findById(id)           
+            .exec((err, autores) => {
+                if (err) {
+                    res.status(400).send({ message: `${err.message} - Id do livro não localizado.` })
+                } else {
+                    res.status(200).send(autores);
+                }
+            })
     }
 
     static cadastrarAutor = (req, res) => {
